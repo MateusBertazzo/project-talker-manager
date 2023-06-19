@@ -18,11 +18,13 @@ route.get('/:id', async (req, res) => {
 
   const data = await readFile();
 
-  if (data.length === 0) {
-    return res.status(200).json([]);
-  }
+  const talkerId = data.find((talker) => talker.id === Number(id));
 
-  return res.status(200).json(data);
+  if (!talkerId) {
+    return res.status(404).json({ message: "Pessoa palestrante não encontrada"})
+  };
+
+  return res.status(200).json(talkerId);
 });
 
 module.exports = route;
