@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-
+const crypto = require('crypto');
 const path = require('path');
 
 const realPath = path.resolve(__dirname, '..', 'talker.json');
@@ -10,6 +10,16 @@ const readFile = async () => {
   return data;
 };
 
+const writeFile = async (updateData) => {
+  await fs.writeFile('src/talker.json', updateData);
+};
+
+const generateRandomId = () => {
+  crypto.ramdomBytes(8).toString('hex');
+};
+
 module.exports = {
   readFile,
+  writeFile,
+  generateRandomId,
 };
