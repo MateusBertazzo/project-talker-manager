@@ -21,8 +21,8 @@ route.get('/:id', async (req, res) => {
   const talkerId = data.find((talker) => talker.id === Number(id));
 
   if (!talkerId) {
-    return res.status(404).json({ message: "Pessoa palestrante não encontrada"})
-  };
+    return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
 
   return res.status(200).json(talkerId);
 });
