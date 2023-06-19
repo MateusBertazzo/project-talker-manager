@@ -1,5 +1,5 @@
 const express = require('express');
-const { readFile } = require('../utils/utils');
+const { readFile, writeFile } = require('../utils/utils');
 
 const routeTalker = express.Router();
 
@@ -25,6 +25,19 @@ routeTalker.get('/:id', async (req, res) => {
   }
 
   return res.status(200).json(talkerId);
+});
+
+routeTalker.post('/', async (req, res) => {
+  const talkers = await readFile();
+
+  const id = talkers.length + 1;
+
+  const newTalker = { id, ...req.body };
+
+  talkers.push(newTalker);
+
+  await writeFile(JSON.stringify(talkers, null, 2));
+  return res.status(201).json({ talkers });
 });
 
 module.exports = routeTalker;
