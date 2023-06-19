@@ -58,12 +58,16 @@ const validateTalk = (req, res, next) => {
   if (!talk) {
     return res.status(400).json({ message: 'O campo "talk" é obrigatório' });
   }
+  if (talk.rate === 0) {
+  return res.status(400).json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
+  }
 
   next();
 };
 
 const validateWatchedAt = (req, res, next) => {
   const { watchedAt } = req.body.talk;
+
   // REGEX ALEATORIO DA INTERNET
   const dateRegex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
@@ -79,10 +83,29 @@ const validateWatchedAt = (req, res, next) => {
 
   next();
 };
+
+const validateRate = (req, res, next) => {
+  const { rate } = req.body.talk;
+
+  if (!rate) {
+    return res.status(400).json({ message: 'O campo "rate" é obrigatório' });
+  }
+  if (!Number.isInteger(rate)) {
+    return res
+    .status(400).json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
+  }
+  if (rate < 1 || rate > 5) {
+    return res
+    .status(400).json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
+  }
+  next();
+};
+
 module.exports = {
   verifyAuthorization,
   validateName,
   validateAge,
   validateTalk,
   validateWatchedAt,
+  validateRate,
 };
