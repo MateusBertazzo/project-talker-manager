@@ -18,12 +18,12 @@ const validateEmail = (req, res, next) => {
 
 const validatePassword = (req, res, next) => {
   const { password } = req.body;
-  const MAX_LEN_PASSWORD = 6;
+  const MIN_LEN_PASSWORD = 6;
   if (!password) {
     return res.status(400).json({ message: 'O campo "password" é obrigatório' });
   }
 
-  if (password.length < MAX_LEN_PASSWORD) {
+  if (password.length < MIN_LEN_PASSWORD) {
     return res.status(400).json({ message: 'O "password" deve ter pelo menos 6 caracteres' });
   }
 
