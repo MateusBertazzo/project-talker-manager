@@ -4,6 +4,8 @@ const {
   verifyAuthorization, 
   validateName, 
   validateAge,
+  validateTalk,
+  validateWatchedAt,
 } = require('../middleares/validateTalkerFields');
 
 const routeTalker = express.Router();
@@ -33,7 +35,7 @@ routeTalker.get('/:id', async (req, res) => {
 });
 
 routeTalker.post('/', verifyAuthorization,
-validateName, validateAge, async (req, res) => {
+validateName, validateAge, validateTalk, validateWatchedAt, async (req, res) => {
   const talkers = await readFile();
 
   const id = talkers.length + 1;
