@@ -71,4 +71,17 @@ validateName, validateAge, validateTalk, validateWatchedAt, validateRate, async 
   return res.status(200).json(updateTalker);
 });
 
+routeTalker.delete('/:id', verifyAuthorization, async (req, res) => {
+  const { id } = req.params;
+
+  const talkers = await readFile();
+  const talkerIndice = talkers.findIndex((talker) => talker.id === Number(id));
+
+  talkers.splice(talkerIndice, 1);
+
+  await writeFile(JSON.stringify(talkers, null, 2));
+
+  return res.status(204).json();
+});
+
 module.exports = routeTalker;
