@@ -45,8 +45,30 @@ validateName, validateAge, validateTalk, validateWatchedAt, validateRate, async 
 
   talkers.push(newTalker);
 
-  await writeFile(JSON.stringify(talkers));
+  await writeFile(JSON.stringify(talkers, null, 2));
   return res.status(201).json(newTalker);
+});
+
+routeTalker.put('/:id', verifyAuthorization,
+validateName, validateAge, validateTalk, validateWatchedAt, validateRate, async (req, res) => {
+  const { id } = req.params;
+
+  const talkerId = Number(id);
+
+  const talkers = await readFile();
+
+  const indexTalker = talkers.findIndex((talker) => talker.id === talkerId);
+
+  if (indexTalker === -1) {
+    return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+
+  const updateTalker = { id: talkerId, ...req.body };
+
+  talkers[indexTalker] = updateTalker;
+
+  await writeFile(JSON.stringify(talkers, null, 2));
+  return res.status(200).json(updateTalker);
 });
 
 module.exports = routeTalker;
