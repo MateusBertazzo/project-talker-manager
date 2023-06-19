@@ -45,8 +45,8 @@ validateName, validateAge, validateTalk, validateWatchedAt, validateRate, async 
 
   talkers.push(newTalker);
 
-  await writeFile(JSON.stringify(talkers, null, 2));
-  return res.status(201).json({ talkers });
+  await writeFile(JSON.stringify(talkers));
+  return res.status(201).json(newTalker);
 });
 
 module.exports = routeTalker;
