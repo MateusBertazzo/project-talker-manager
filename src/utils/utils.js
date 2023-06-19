@@ -14,9 +14,8 @@ const writeFile = async (updateData) => {
   await fs.writeFile('src/talker.json', updateData);
 };
 
-const generateRandomId = () => {
-  crypto.ramdomBytes(8).toString('hex');
-};
+const generateRandomId = () => crypto.randomBytes(8).toString('hex');
+;
 
 module.exports = {
   readFile,
