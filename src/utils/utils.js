@@ -15,7 +15,6 @@ const writeFile = async (updateData) => {
 };
 
 const generateRandomId = () => crypto.randomBytes(8).toString('hex');
-;
 
 module.exports = {
   readFile,
