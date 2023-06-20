@@ -1,6 +1,6 @@
 const validateEmail = (req, res, next) => {
   const { email } = req.body;
-
+  // REGEX ALEATORIO DA INTERNET
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const verifyEmail = emailRegex.test(email);

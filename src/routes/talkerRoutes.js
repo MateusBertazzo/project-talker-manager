@@ -21,6 +21,16 @@ routeTalker.get('/', async (req, res) => {
   return res.status(200).json(data);
 });
 
+routeTalker.get('/search', verifyAuthorization, async (req, res) => {
+  const { q } = req.query;
+
+  const talkers = await readFile();
+
+  const filteredTalkers = talkers.filter((talker) => talker.name.includes(q));
+
+  return res.status(200).json(filteredTalkers);
+});
+
 routeTalker.get('/:id', async (req, res) => {
   const { id } = req.params;
 

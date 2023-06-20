@@ -6,11 +6,7 @@ const verifyAuthorization = (req, res, next) => {
     return res.status(401).json({ message: 'Token não encontrado' });
   }
 
-  if (authorization.length !== LEN_TOKEN) {
-    return res.status(401).json({ message: 'Token inválido' });
-  }
-
-  if (typeof authorization !== 'string') {
+  if (typeof authorization !== 'string' || authorization.length !== LEN_TOKEN) {
     return res.status(401).json({ message: 'Token inválido' });
   }
 
@@ -39,12 +35,7 @@ const validateAge = (req, res, next) => {
   if (!age || age === '') {
     return res.status(400).json({ message: 'O campo "age" é obrigatório' });
   }
-  if (age < MIN_AGE) {
-    return res
-      .status(400)
-      .json({ message: 'O campo "age" deve ser um número inteiro igual ou maior que 18' });
-  }
-  if (!Number.isInteger(age)) {
+  if (age < MIN_AGE || !Number.isInteger(age)) {
     return res
       .status(400)
       .json({ message: 'O campo "age" deve ser um número inteiro igual ou maior que 18' });
@@ -70,13 +61,11 @@ const validateWatchedAt = (req, res, next) => {
 
   // REGEX ALEATORIO DA INTERNET
   const dateRegex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-
   const verifydate = dateRegex.test(watchedAt);
 
   if (!watchedAt) {
     return res.status(400).json({ message: 'O campo "watchedAt" é obrigatório' });
   }
-
   if (!verifydate) {
     return res.status(400).json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
   }
@@ -90,11 +79,7 @@ const validateRate = (req, res, next) => {
   if (!rate) {
     return res.status(400).json({ message: 'O campo "rate" é obrigatório' });
   }
-  if (!Number.isInteger(rate)) {
-    return res
-    .status(400).json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
-  }
-  if (rate < 1 || rate > 5) {
+  if (!Number.isInteger(rate) || rate < 1 || rate > 5) {
     return res
     .status(400).json({ message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' });
   }
