@@ -63,17 +63,15 @@ routeTalker.put('/:id', verifyAuthorization,
 validateName, validateAge, validateTalk, validateWatchedAt, validateRate, async (req, res) => {
   const { id } = req.params;
 
-  const talkerId = Number(id);
-
   const talkers = await readFile();
 
-  const indexTalker = talkers.findIndex((talker) => talker.id === talkerId);
+  const indexTalker = talkers.findIndex((talker) => talker.id === Number(id));
 
   if (indexTalker === -1) {
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   }
 
-  const updateTalker = { id: talkerId, ...req.body };
+  const updateTalker = { id: Number(id), ...req.body };
 
   talkers[indexTalker] = updateTalker;
 
