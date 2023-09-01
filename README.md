@@ -1,13 +1,30 @@
-- Oque foi desenvolvido:
+# Projeto TalkerManager API
+  <summary><strong>O que foi feito</strong></summary></br>
 
-Construi uma aplicação de cadastro de talkers (palestrantes) em que será possível cadastrar, visualizar, pesquisar, editar e excluir informações.
+  Neste projeto desenvolvi uma API de cadastro de talkers (palestrantes) em que será possível cadastrar, visualizar, pesquisar, editar e excluir informações(CRUD).
 
-- Por que isso é importante?
-O conjunto de operações conhecido como CRUD (Create, Read, Update e Delete) constituem a forma mais básica de manipular dados. Apesar disso, boa parte das aplicações de mercado giram em torno dessas quatro operações. Neste projeto, você implementará essas operações utilizando Node.js, express e o módulo fs.
+  A aplicação foi desenvolvida com:
 
-Além de treinar os conhecimentos adquiridos nesta seção, você estará criando um tipo de aplicação extremamente comum no mercado e experimentando, em primeira mão, alguns dos desafios e das particularidades que essas aplicações podem trazer.
+- `Node.js`
+- `docker`
+- `docker-compose`
+- `Express`;
+- `APIs Rest`;
 
-- Tecnologias Usadas:
-1- Node.Js
-2- Express
-3- APIs Rest
+  <summary><strong>Como rodar o projeto</strong></summary></br>
+
+  **Com Docker:**
+
+  ** :warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior.
+
+- `docker-compose up -d --build`
+- `docker exec -it talker_manager bash`
+- `npm install`
+- `npm run dev`
+
+**Localmente:**
+
+**Necessita ter um banco de dados(MySql) instalado localmente**
+
+- `npm install`
+- `npm run dev`
